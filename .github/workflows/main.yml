@@ -9,4 +9,4 @@ jobs:
         uses: ArtemSBulgakov/buildozer-action@v1
         with:
           workdir: .
-          buildozer_version: master
+      
