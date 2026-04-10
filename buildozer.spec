@@ -6,7 +6,7 @@ android.p4a_whitelist
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,hostpython3
+requirements = python3,kivy
 orientation = portrait
 fullscreen = 0
 android.archs = arm64-v8a
