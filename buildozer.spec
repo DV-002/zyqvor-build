@@ -2,6 +2,7 @@
 title = Zyqvorgram
 package.name = zyqvorgram 
 package.domain = org.zyqvor
+android.p4a_whitelist
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
