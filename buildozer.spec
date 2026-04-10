@@ -1,7 +1,7 @@
 [app]
 title = Zyqvorgram
-package.name = zyqvorgram
-package.domain = org.test
+package.name = zyqvorgram 
+package.domain = org.zyqvor
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
