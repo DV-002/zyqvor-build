@@ -1,49 +1,45 @@
-import time
-from rich.console import Console
-from rich.panel import Panel
-from rich.layout import Layout
-from rich.live import Live
-from rich.text import Text
+from kivy.app import App
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
+from kivy.uix.label import Label
+from kivy.core.window import Window
 
-console = Console()
+class ZyqvorgramApp(App):
+    def build(self):
+        # Делаем черный фон, как в терминале
+        Window.clearcolor = (0, 0, 0, 1)
+        
+        layout = BoxLayout(orientation='vertical', padding=10, spacing=10)
+        
+        # Область, где будут сообщения
+        self.chat_logs = Label(
+            text="[System] Добро пожаловать в Zyqvorgram!\n",
+            color=(0, 1, 0, 1), # Зеленый текст
+            valign='top',
+            halign='left',
+            text_size=(Window.width - 20, None)
+        )
+        layout.add_widget(self.chat_logs)
 
-def run_messenger():
-    # Заставка
-    console.print("[bold magenta]Запуск zyqvorgram...[/bold magenta]", style="italic")
-    time.sleep(1)
-    
-    messages = [
-        ("System", "Добро пожаловать, Zyqvornex!", "cyan"),
-        ("System", "Все системы зашифрованы. Протокол активен.", "red")
-    ]
+        # ПОЛЕ ВВОДА (оно вызовет клавиатуру!)
+        self.input_data = TextInput(
+            multiline=False,
+            size_hint_y=None,
+            height=50,
+            background_color=(0.1, 0.1, 0.1, 1),
+            foreground_color=(1, 1, 1, 1),
+            hint_text="Напиши что-нибудь..."
+        )
+        self.input_data.bind(on_text_validate=self.send_message)
+        layout.add_widget(self.input_data)
+        
+        return layout
 
-    while True:
-        # Очистка экрана для красоты
-        console.clear()
-        
-        # Заголовок
-        console.print(Panel("[bold white]ZYQVORGRAM[/bold white] [dim]v1.0.4[/dim]", 
-                            border_style="magenta", expand=False))
-        
-        # Вывод истории сообщений
-        for sender, text, color in messages:
-            console.print(f"[{color}][bold]{sender}:[/bold] {text}[/{color}]")
-        
-        console.print("\n" + "—" * 30)
-        
-        # Ввод сообщения
-        try:
-            user_input = console.input("[bold green]>>> [/bold green]")
-            
-            if user_input.lower() in ['exit', 'quit', 'выход']:
-                console.print("[bold yellow]Сессия завершена.[/bold yellow]")
-                break
-                
-            if user_input:
-                messages.append(("Вы", user_input, "blue"))
-                
-        except KeyboardInterrupt:
-            break
+    def send_message(self, instance):
+        if self.input_data.text:
+            new_text = f"Вы: {self.input_data.text}\n"
+            self.chat_logs.text += new_text
+            self.input_data.text = "" # Очистить после отправки
 
 if __name__ == "__main__":
-    run_messenger()
+    ZyqvorgramApp().run()
