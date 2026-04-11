@@ -10,7 +10,7 @@ requirements = python3,kivy==2.3.0
 orientation = portrait
 fullscreen = 0
 android.archs = arm64-v8a
-android.api = 33
+android.api = 31
 android.minapi = 21
 android.skip_update = False
 android.accept_sdk_license = True
