@@ -7,6 +7,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
       - name: Install Tools
         run: |
           sudo apt-get update
@@ -17,4 +23,3 @@ jobs:
       - name: Run Buildozer
         run: |
           buildozer android debug
-      
